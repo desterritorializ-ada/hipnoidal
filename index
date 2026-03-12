@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="HIPNOIDAL — Butoh Dance, Shadow Theatre & Live Music. Pierina Lategola, Ada Gomiz & Tatiana Zuccolotto.">
+<title>HIPNOIDAL</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,600&family=Cormorant+SC:wght@300;400;500&family=Raleway:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg:#060609; --bg-mid:#0c0c14; --text:#c9c2b0; --text-bright:#e8e0ce;
+    --gold:#b8935a; --gold-dim:rgba(184,147,90,0.35); --white:#ece7dc;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:'Cormorant Garamond',Georgia,serif;font-weight:300;font-size:18px;line-height:1.8;overflow-x:hidden}
+  body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");pointer-events:none;z-index:9999;opacity:.6}
+  img{max-width:100%;display:block}
+  a{color:var(--gold);text-decoration:none;transition:opacity .3s}
+  a:hover{opacity:.7}
+
+  #lang-bar{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:flex-end;align-items:center;padding:18px 36px;gap:6px;background:linear-gradient(to bottom,rgba(6,6,9,.95) 60%,transparent);transition:background .4s}
+  .lang-btn{background:none;border:none;color:var(--text);font-family:'Raleway',sans-serif;font-size:11px;font-weight:300;letter-spacing:.18em;cursor:pointer;padding:6px 10px;opacity:.45;transition:opacity .3s,color .3s}
+  .lang-btn:hover{opacity:.75}
+  .lang-btn.active{color:var(--gold);opacity:1;border-bottom:1px solid var(--gold-dim)}
+  .lang-sep{color:var(--gold-dim);font-size:10px;user-select:none}
+
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 24px 60px;position:relative}
+  #hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+  .hero-title-text{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(52px,9vw,108px);letter-spacing:.22em;color:var(--white);opacity:0;animation:fadeUp 1.6s ease forwards .4s;margin-bottom:32px}
+  .hero-subtitle{font-family:'Raleway',sans-serif;font-size:clamp(9px,1.5vw,12px);font-weight:300;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 1.4s ease forwards 1s}
+  .hero-names{font-family:'Raleway',sans-serif;font-size:clamp(9px,1.2vw,11px);font-weight:200;letter-spacing:.28em;color:var(--text);text-transform:uppercase;opacity:0;animation:fadeUp 1.4s ease forwards 1.3s}
+  .hero-scroll-hint{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease forwards 2.5s}
+  .hero-scroll-hint span{font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase}
+  .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold-dim),transparent);animation:scrollLine 2s ease-in-out infinite 3s}
+
+  .full-bleed-img{width:100%;max-height:90vh;overflow:hidden;position:relative}
+  .full-bleed-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;opacity:.88}
+  .full-bleed-img::before{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,var(--bg) 0%,transparent 15%,transparent 85%,var(--bg) 100%);z-index:1;pointer-events:none}
+
+  .section{padding:80px 24px}
+  .section-inner{max-width:760px;margin:0 auto}
+  .section-label{font-family:'Raleway',sans-serif;font-size:10px;font-weight:300;letter-spacing:.4em;color:var(--gold);text-transform:uppercase;margin-bottom:36px;display:flex;align-items:center;gap:16px}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--gold-dim);max-width:120px}
+  .body-text{font-size:clamp(17px,2vw,20px);font-weight:300;line-height:1.85;color:var(--text)}
+  .body-text+.body-text{margin-top:24px}
+
+  #concept{background:var(--bg-mid);padding:80px 24px}
+  blockquote{border-left:1px solid var(--gold-dim);padding:8px 0 8px 32px;margin:48px 0}
+  blockquote p{font-size:clamp(17px,2vw,20px);font-style:italic;font-weight:300;color:var(--text);line-height:1.9}
+  blockquote cite{display:block;margin-top:16px;font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.25em;color:var(--gold);font-style:normal}
+  .poetic-lines{font-size:clamp(17px,2vw,19px);font-style:italic;line-height:2.1;color:var(--text)}
+  .poetic-lines p{margin-bottom:8px}
+
+  .gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:3px;max-width:1100px;margin:0 auto}
+  .gallery-grid img{width:100%;height:400px;object-fit:cover;opacity:.82;transition:opacity .5s}
+  .gallery-grid img:hover{opacity:1}
+  .gallery-grid img:first-child{grid-column:1/-1;height:520px}
+
+  .artist{display:grid;grid-template-columns:280px 1fr;gap:48px;margin-bottom:80px;align-items:start}
+  .artist:nth-child(even){direction:rtl}
+  .artist:nth-child(even)>*{direction:ltr}
+  .artist-photo{width:100%;aspect-ratio:3/4;object-fit:cover;object-position:center top;opacity:.85;filter:grayscale(15%)}
+  .artist-name{font-family:'Raleway',sans-serif;font-size:11px;font-weight:400;letter-spacing:.3em;color:var(--white);text-transform:uppercase;margin-bottom:6px}
+  .artist-role{font-family:'Raleway',sans-serif;font-size:10px;font-weight:300;letter-spacing:.2em;color:var(--gold);margin-bottom:20px}
+  .artist-bio{font-size:16px;line-height:1.8;color:var(--text);margin-bottom:16px}
+  .artist-links{font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.15em}
+  .artist-links a{color:var(--gold)}
+
+  #scenic{padding:80px 24px}
+  .scenic-layout{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;max-width:1100px;margin:0 auto}
+  .scenic-img{width:100%;opacity:.8}
+
+  #presentations{background:var(--bg-mid);padding:80px 24px}
+  .show-list{list-style:none}
+  .show-item{display:grid;grid-template-columns:100px 1fr;gap:24px;padding:20px 0;border-bottom:1px solid rgba(184,147,90,.1);align-items:baseline}
+  .show-date{font-family:'Raleway',sans-serif;font-size:10px;font-weight:300;letter-spacing:.2em;color:var(--gold);text-transform:uppercase}
+  .show-venue{font-size:17px;color:var(--text)}
+  .show-venue a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--gold-dim);transition:color .3s,border-color .3s}
+  .show-venue a:hover{color:var(--gold);border-color:var(--gold)}
+
+  /* ── Nordic Tour ── */
+  #nordic-tour{padding:100px 24px;position:relative;overflow:hidden}
+  #nordic-tour::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(30,60,80,.22) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 50%,rgba(60,40,80,.14) 0%,transparent 60%);pointer-events:none}
+  .nordic-inner{max-width:900px;margin:0 auto;position:relative}
+  .nordic-headline{display:flex;align-items:flex-end;gap:24px;margin-bottom:20px;flex-wrap:wrap}
+  .nordic-title{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(32px,5vw,64px);letter-spacing:.12em;color:var(--white);line-height:1}
+  .nordic-year{font-family:'Raleway',sans-serif;font-size:clamp(11px,1.5vw,14px);font-weight:200;letter-spacing:.3em;color:var(--gold);padding-bottom:8px}
+  .nordic-divider{width:80px;height:1px;background:var(--gold-dim);margin:28px 0 36px}
+  .nordic-text{font-size:clamp(17px,2vw,20px);line-height:1.85;color:var(--text);margin-bottom:48px;max-width:640px}
+  .contact-block{border:1px solid var(--gold-dim);padding:36px 40px;max-width:580px;position:relative}
+  .contact-block::before{content:'';position:absolute;top:-1px;left:40px;width:60px;height:1px;background:var(--bg)}
+  .contact-tag{position:absolute;top:-8px;left:40px;font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;background:var(--bg);padding:0 8px}
+  .contact-intro{font-family:'Raleway',sans-serif;font-size:11px;letter-spacing:.15em;color:var(--text);opacity:.7;margin-bottom:20px}
+  .contact-list{list-style:none;display:flex;flex-direction:column;gap:14px}
+  .contact-list li{display:flex;align-items:baseline;gap:14px}
+  .contact-who{font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;min-width:60px;opacity:.8}
+  .contact-handle{font-size:16px;color:var(--text-bright)}
+  .contact-handle a{color:var(--text-bright);border-bottom:1px solid var(--gold-dim);transition:color .3s,border-color .3s}
+  .contact-handle a:hover{color:var(--gold);border-color:var(--gold)}
+  .nordic-note{margin-top:36px;font-size:15px;font-style:italic;color:var(--text);opacity:.55;max-width:540px;line-height:1.7}
+
+  footer{padding:60px 24px;text-align:center;border-top:1px solid rgba(184,147,90,.1)}
+  .footer-mark{font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.4em;color:rgba(184,147,90,.4);text-transform:uppercase;margin-bottom:20px}
+  .footer-links{display:flex;justify-content:center;gap:32px;flex-wrap:wrap}
+  .footer-links a{font-family:'Raleway',sans-serif;font-size:10px;letter-spacing:.2em;color:var(--text);opacity:.5;transition:opacity .3s}
+  .footer-links a:hover{opacity:1;color:var(--gold)}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes scrollLine{0%,100%{transform:scaleY(1);transform-origin:top;opacity:1}50%{transform:scaleY(.3);transform-origin:bottom;opacity:.4}}
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .9s ease,transform .9s ease}
+  .reveal.visible{opacity:1;transform:translateY(0)}
+  [data-lang]{display:none}
+  [data-lang].lang-active{display:block}
+  span[data-lang].lang-active{display:inline}
+
+  @media(max-width:768px){
+    .artist{grid-template-columns:1fr;direction:ltr!important}
+    .artist-photo{max-width:280px;aspect-ratio:1/1}
+    .scenic-layout{grid-template-columns:1fr}
+    .gallery-grid{grid-template-columns:1fr}
+    .gallery-grid img:first-child{grid-column:1;height:280px}
+    .gallery-grid img{height:280px}
+    .show-item{grid-template-columns:80px 1fr;gap:12px}
+    #lang-bar{padding:14px 20px;gap:2px}
+    .lang-btn{padding:4px 6px;font-size:10px}
+    .contact-block{padding:28px 24px}
+    .nordic-headline{gap:14px}
+  }
+</style>
+</head>
+<body>
+
+<nav id="lang-bar">
+  <button class="lang-btn active" onclick="setLang('en')" id="btn-en">EN</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('es')" id="btn-es">ES</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('da')" id="btn-da">DA</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('no')" id="btn-no">NO</button>
+  <span class="lang-sep">·</span>
+  <button class="lang-btn" onclick="setLang('sv')" id="btn-sv">SV</button>
+</nav>
+
+<section id="hero">
+  <h1 class="hero-title-text">HIPNOIDAL</h1>
+  <p class="hero-subtitle">
+    <span data-lang="en" class="lang-active">Butoh Dance · Shadow Theatre · Live Music</span>
+    <span data-lang="es">Danza Butoh · Teatro de Sombras · Música en Vivo</span>
+    <span data-lang="da">Butoh-Dans · Skygge-Teater · Live Musik</span>
+    <span data-lang="no">Butoh-Dans · Skygge-Teater · Live Musikk</span>
+    <span data-lang="sv">Butoh-Dans · Skuggteater · Livemusik</span>
+  </p>
+  <p class="hero-names">Pierina Lategola &nbsp;·&nbsp; Ada Gomiz &nbsp;·&nbsp; Tatiana Zuccolotto</p>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>
+      <span data-lang="en" class="lang-active">scroll</span>
+      <span data-lang="es">desliza</span>
+      <span data-lang="da">rul ned</span>
+      <span data-lang="no">rull ned</span>
+      <span data-lang="sv">scrolla</span>
+    </span>
+  </div>
+</section>
+
+<div class="full-bleed-img">
+  <img src="images/afiche.png" alt="Hipnoidal poster" style="max-height:90vh;object-position:center top;">
+</div>
+
+<section class="section reveal">
+  <div class="section-inner">
+    <p class="section-label">
+      <span data-lang="en" class="lang-active">About</span>
+      <span data-lang="es">Sobre la obra</span>
+      <span data-lang="da">Om forestillingen</span>
+      <span data-lang="no">Om forestillingen</span>
+      <span data-lang="sv">Om verket</span>
+    </p>
+    <p class="body-text" data-lang="en" class="lang-active">Hipnoidal is an interdisciplinary work combining butoh dance, shadow theater, and live music that evokes a state between dreams and wakefulness. From this in-between place, we seek to delve into the wonder of the living, exploring the connection with ephemeral territories, elemental forces and that body traversing memories to amplify what we perceive as world, as self, as other.</p>
+    <p class="body-text" data-lang="en" class="lang-active">Through the primal relationship between light and darkness, the boundaries between the human and the non-human are blurred, revealing nuances in search of meanings that transcend us.</p>
+    <p class="body-text" data-lang="es">Hipnoidal es una obra interdisciplinaria que combina danza butoh, teatro de sombras y música en vivo que evoca un estado entre el sueño y la vigilia. Desde ese lugar intermedio, buscamos adentrarnos en la maravilla de lo viviente, explorando la conexión con territorios efímeros, fuerzas elementales y ese cuerpo que atraviesa memorias para ampliar lo que percibimos como mundo, como uno mismo, como otro.</p>
+    <p class="body-text" data-lang="es">A través de la relación primigenia entre luz y oscuridad, se difuminan los límites entre lo humano y lo no humano, revelando matices en busca de significados que nos trascienden.</p>
+    <p class="body-text" data-lang="da">Hipnoidal er et tværfagligt værk, der kombinerer butoh-dans, skygge-teater og live musik, som fremkalder en tilstand mellem drøm og vågenhed. Fra dette mellemrum søger vi at dykke ned i underet ved det levende, og udforske forbindelsen til flygtige territorier, elementale kræfter og den krop, der krydser minder for at udvide det, vi opfatter som verden, som selvet, som den anden.</p>
+    <p class="body-text" data-lang="da">Gennem det primære forhold mellem lys og mørke sløres grænserne mellem det menneskelige og det ikke-menneskelige, og afslører nuancer i søgen efter mening, der transcenderer os.</p>
+    <p class="body-text" data-lang="no">Hipnoidal er et tverrfaglig verk som kombinerer butoh-dans, skygge-teater og live musikk, som fremkaller en tilstand mellom drøm og våkenhet. Fra dette mellomrommet søker vi å fordype oss i underet ved det levende, og utforske forbindelsen til flyktige territorier, elementale krefter og den kroppen som krysser minner for å utvide det vi oppfatter som verden, som selv, som den andre.</p>
+    <p class="body-text" data-lang="no">Gjennom det primære forholdet mellom lys og mørke viskes grensene mellom det menneskelige og det ikke-menneskelige ut, og avslører nyanser i søken etter mening som transcenderer oss.</p>
+    <p class="body-text" data-lang="sv">Hipnoidal är ett interdisciplinärt verk som kombinerar butoh-dans, skuggteater och livemusik, som framkallar ett tillstånd mellan dröm och vakenhet. Från detta mellanrum söker vi att fördjupa oss i undret hos det levande, och utforska sambandet med flyktiga territorier, elementala krafter och den kropp som korsar minnen för att vidga vad vi uppfattar som värld, som jag, som den andre.</p>
+    <p class="body-text" data-lang="sv">Genom det ursprungliga förhållandet mellan ljus och mörker suddas gränserna mellan det mänskliga och det icke-mänskliga ut, och avslöjar nyanser i sökandet efter mening som transcenderar oss.</p>
+  </div>
+</section>
+
+<section id="concept" class="reveal">
+  <div class="section-inner">
+    <p class="section-label">
+      <span data-lang="en" class="lang-active">Concept</span>
+      <span data-lang="es">Concepto</span>
+      <span data-lang="da">Koncept</span>
+      <span data-lang="no">Konsept</span>
+      <span data-lang="sv">Koncept</span>
+    </p>
+    <blockquote data-lang="en" class="lang-active"><p>"Human beings can live fully thanks to the dead — that generates the energy to live; the problem of the capacity for imagination is intimately linked to this: it is the sustenance of existence; a bright future can exist through the deep gratitude or grace granted by those who lived before. A concept is generated within the superimposition of the infinite. The rational concept, already formed, represents nothing more than the root of the human being. Illusion, dream, fantasy and delirium are important. To give thanks is 'to care for life beyond oneself and the other'; we must care for the grace of the dead, we must put in order the dwelling of the dead, we must wish that they grow alongside the living."</p><cite>— Kazuo Ohno</cite></blockquote>
+    <blockquote data-lang="es"><p>"El ser humano puede vivir con plenitud gracias a los muertos, eso genera la energía para poder vivir; el problema de la capacidad de la imaginación está íntimamente ligado a esto: es el sostén de la existencia; el futuro brillante puede existir por medio del profundo agradecimiento o las gracias que conceden los que han vivido antes. Un concepto se genera dentro de la superposición de lo infinito. El concepto racional, ya formado, representa nada más que la raíz del ser humano. Son importantes la ilusión, el sueño, la fantasía y el delirio. Agradecer es 'cuidar la vida más allá de uno mismo y del otro'; debemos cuidar la gracia de los muertos, debemos ordenar la vivienda de los muertos, debemos desear que ellos crezcan junto con los vivos."</p><cite>— Kazuo Ohno</cite></blockquote>
+    <blockquote data-lang="da"><p>"Mennesket kan leve fuldt ud takket være de døde — det genererer energien til at leve; problemet med forestillingsevnen er intimt forbundet med dette: det er eksistensens næring; en lys fremtid kan eksistere gennem den dybe taknemmelighed eller nåde, der gives af dem, der levede før. Et begreb skabes inden for overlejringen af det uendelige. Det rationelle begreb, allerede dannet, repræsenterer intet andet end menneskenes rod. Illusion, drøm, fantasi og delirium er vigtige. At takke er 'at tage sig af livet ud over sig selv og den anden'; vi må tage os af de dødes nåde, vi må sætte orden i de dødes bolig, vi må ønske, at de vokser sammen med de levende."</p><cite>— Kazuo Ohno</cite></blockquote>
+    <blockquote data-lang="no"><p>"Mennesket kan leve fullt ut takket være de døde — det genererer energien til å leve; problemet med forestillingsevnen er intimt forbundet med dette: det er eksistensens næring; en lys fremtid kan eksistere gjennom den dype takknemligheten eller nåden som gis av dem som levde før. Et begrep skapes innenfor overlagringen av det uendelige. Det rasjonelle begrepet, allerede dannet, representerer intet annet enn menneskehetens rot. Illusjon, drøm, fantasi og delirium er viktige. Å takke er 'å ta seg av livet utover seg selv og den andre'; vi må ta oss av de dødes nåde, vi må sette orden i de dødes bolig, vi må ønske at de vokser sammen med de levende."</p><cite>— Kazuo Ohno</cite></blockquote>
+    <blockquote data-lang="sv"><p>"Människan kan leva fullt ut tack vare de döda — det genererar energin att leva; problemet med föreställningsförmågan är intimt kopplat till detta: det är existensens näring; en ljus framtid kan existera genom den djupa tacksamheten eller nåden som ges av dem som levde före. Ett begrepp skapas inom överskiktningen av det oändliga. Det rationella begreppet, redan format, representerar inget annat än människans rot. Illusion, dröm, fantasi och delirium är viktiga. Att tacka är 'att vårda livet bortom sig själv och den andre'; vi måste vårda de dödas nåd, vi måste ordna de dödas boning, vi måste önska att de växer tillsammans med de levande."</p><cite>— Kazuo Ohno</cite></blockquote>
+    <div class="poetic-lines" data-lang="en" class="lang-active"><p>Lives are woven into infinite materialities and durations.<br>There, far back, the threads of the past move ours.</p><p>There was a time of cosmological immensities.<br>We were matter without memory traveling in the Void.</p><p>We continue to explore what awakens the encounter with another.<br>We continue to investigate how to build a home without land, a nomadic home.</p><p>Being a force recognizing itself in an environment full of other forms of life different from its own.</p></div>
+    <div class="poetic-lines" data-lang="es"><p>Las vidas se tejen en materialidades y duraciones infinitas.<br>Allí, en lo profundo, los hilos del pasado mueven los nuestros.</p><p>Hubo un tiempo de inmensidades cosmológicas.<br>Éramos materia sin memoria viajando en el Vacío.</p><p>Continuamos explorando lo que despierta el encuentro con el otro.<br>Continuamos investigando cómo construir un hogar sin tierra, un hogar nómade.</p><p>Ser una fuerza que se reconoce a sí misma en un entorno lleno de otras formas de vida diferentes a la propia.</p></div>
+    <div class="poetic-lines" data-lang="da"><p>Liv er vævet ind i uendelige materialiteter og varigheder.<br>Dér, langt bagude, bevæger fortidens tråde vores.</p><p>Der var en tid med kosmologiske immensiteter.<br>Vi var stof uden hukommelse, der rejste i Tomrummet.</p><p>Vi fortsætter med at udforske, hvad der vækker mødet med en anden.<br>Vi forsætter med at undersøge, hvordan man bygger et hjem uden jord, et nomadisk hjem.</p><p>At være en kraft, der genkender sig selv i et miljø fyldt med andre livsformer, der er anderledes end ens egne.</p></div>
+    <div class="poetic-lines" data-lang="no"><p>Liv er vevd inn i uendelige materialiteter og varigheter.<br>Der, langt bak, beveger fortidens tråder våre.</p><p>Det var en tid med kosmologiske immensiteter.<br>Vi var materie uten minne som reiste i Tomrommet.</p><p>Vi fortsetter med å utforske hva som vekker møtet med en annen.<br>Vi fortsetter med å undersøke hvordan man bygger et hjem uten jord, et nomadisk hjem.</p><p>Å være en kraft som kjenner seg igjen i et miljø fylt med andre livsformer som er forskjellige fra ens egne.</p></div>
+    <div class="poetic-lines" data-lang="sv"><p>Liv är vävda in i oändliga materialiteter och varaktigheter.<br>Där, långt bak, rör förflutenhetens trådar våra.</p><p>Det var en tid av kosmologiska immensiteter.<br>Vi var materia utan minne som reste i Tomrummet.</p><p>Vi fortsätter att utforska vad som väcker mötet med en annan.<br>Vi fortsätter att undersöka hur man bygger ett hem utan land, ett nomadiskt hem.</p><p>Att vara en kraft som känner igen sig själv i en miljö full av andra livsformer som skiljer sig från den egna.</p></div>
+    <br><br>
+    <p class="body-text" data-lang="en" class="lang-active">Images, sounds, and movements are woven together to generate an intermedial state from which to know and not know ourselves, over and over again. Hipnoidal is a work to remember the cycles, metamorphosis, and finitude of all living organisms. A work created in gratitude to the time we are given.</p>
+    <p class="body-text" data-lang="es">Imágenes, sonidos y movimientos se tejen juntos para generar un estado intermedial desde el cual conocernos y desconocernos, una y otra vez. Hipnoidal es una obra para recordar los ciclos, la metamorfosis y la finitud de todos los organismos vivos. Una obra creada en gratitud al tiempo que se nos da.</p>
+    <p class="body-text" data-lang="da">Billeder, lyde og bevægelser er vævet sammen for at skabe en intermedial tilstand, hvorfra vi kan kende og ikke kende os selv, igen og igen. Hipnoidal er et værk til at huske cyklusserne, metamorfosen og endeligheden hos alle levende organismer. Et værk skabt i taknemmelighed over den tid, vi er givet.</p>
+    <p class="body-text" data-lang="no">Bilder, lyder og bevegelser er vevd sammen for å skape en intermedial tilstand som vi kan kjenne og ikke kjenne oss selv fra, igjen og igjen. Hipnoidal er et verk for å huske syklusene, metamorfosen og endeligheten til alle levende organismer. Et verk skabt i takknemlighet for den tiden vi er gitt.</p>
+    <p class="body-text" data-lang="sv">Bilder, ljud och rörelser är vävda samman för att skapa ett intermedialt tillstånd varifrån vi kan känna och inte känna oss själva, om och om igen. Hipnoidal är ett verk för att minnas cyklerna, metamorfosen och ändligheten hos alla levande organismer. Ett verk skapat i tacksamhet för den tid vi ges.</p>
+  </div>
+</section>
+
+<div class="gallery-grid reveal">
+  <img src="images/photo1.jpg" alt="Hipnoidal performance">
+  <img src="images/photo2.jpg" alt="Hipnoidal performance">
+  <img src="images/photo3.jpg" alt="Hipnoidal performance">
+</div>
+
+<section id="scenic" class="reveal">
+  <div class="scenic-layout">
+    <div>
+      <p class="section-label">
+        <span data-lang="en" class="lang-active">Scenic Set Up</span>
+        <span data-lang="es">Montaje Escénico</span>
+        <span data-lang="da">Scenisk Opsætning</span>
+        <span data-lang="no">Scenisk Oppsett</span>
+        <span data-lang="sv">Scenisk Upplägg</span>
+      </p>
+      <p class="body-text" data-lang="en" class="lang-active">A semi-transparent fabric separates the audience from the performers, acting as a screen onto which visuals and the silhouettes of the bodies are projected. The musical performer is behind the fabric.</p>
+      <p class="body-text" data-lang="es">Una tela semitransparente separa al público de los intérpretes, actuando como pantalla sobre la que se proyectan imágenes y las siluetas de los cuerpos. El intérprete musical está detrás de la tela.</p>
+      <p class="body-text" data-lang="da">Et halvgennemsigtigt stof adskiller publikum fra kunstnerne og fungerer som en skærm, hvorpå visuals og kroppenes silhuetter projiceres. Den musikalske kunstner er bag stoffet.</p>
+      <p class="body-text" data-lang="no">Et halvgjennomsiktig stoff skiller publikum fra utøverne og fungerer som en skjerm der visuals og kroppenes silhuetter projiseres. Den musikalske utøveren er bak stoffet.</p>
+      <p class="body-text" data-lang="sv">Ett halvtransparent tyg separerar publiken från utövarna och fungerar som en skärm på vilken visuella element och kropparnas silhuetter projiceras. Den musikaliska utövaren befinner sig bakom tyget.</p>
+    </div>
+    <img class="scenic-img" src="images/scenic.png" alt="Scenic setup diagram">
+  </div>
+</section>
+
+<section class="section reveal">
+  <div class="section-inner" style="max-width:1100px;">
+    <p class="section-label">
+      <span data-lang="en" class="lang-active">Artists' Biographies</span>
+      <span data-lang="es">Biografías</span>
+      <span data-lang="da">Kunstnerbiografier</span>
+      <span data-lang="no">Kunstnerbiografier</span>
+      <span data-lang="sv">Konstnärsbiografier</span>
+    </p>
+    <div class="artist">
+      <img class="artist-photo" src="images/pierina.png" alt="Pierina Lategola">
+      <div>
+        <p class="artist-name">Pierina Lategola</p>
+        <p class="artist-role">
+          <span data-lang="en" class="lang-active">Visual artist, illustrator, graphic designer &amp; performer · UNA, La Plata, Argentina</span>
+          <span data-lang="es">Artista visual, ilustradora, diseñadora gráfica y performer · UNA, La Plata, Argentina</span>
+          <span data-lang="da">Visuel kunstner, illustrator, grafisk designer og performer · UNA, La Plata, Argentina</span>
+          <span data-lang="no">Visuell kunstner, illustratør, grafisk designer og performer · UNA, La Plata, Argentina</span>
+          <span data-lang="sv">Visuell konstnär, illustratör, grafisk designer och performer · UNA, La Plata, Argentina</span>
+        </p>
+        <p class="artist-bio" data-lang="en" class="lang-active">Her poetics are nourished by physical-ritual-somatic practices, intuitions, dreams and nomadic experiences in nature. She explores the convergence between drawing, vocal improvisation, butoh dance, and poetry.</p>
+        <p class="artist-bio" data-lang="es">Su poética se nutre de prácticas físico-rituales-somáticas, intuiciones, sueños y experiencias nómadas en la naturaleza. Explora la convergencia entre el dibujo, la improvisación vocal, la danza butoh y la poesía.</p>
+        <p class="artist-bio" data-lang="da">Hendes poetik næres af fysisk-ritual-somatiske praksisser, intuitioner, drømme og nomadiske oplevelser i naturen. Hun udforsker konvergensen mellem tegning, vokal improvisation, butoh-dans og poesi.</p>
+        <p class="artist-bio" data-lang="no">Hennes poetikk næres av fysisk-ritual-somatiske praksiser, intuisjoner, drømmer og nomadiske opplevelser i naturen. Hun utforsker konvergensen mellom tegning, vokal improvisasjon, butoh-dans og poesi.</p>
+        <p class="artist-bio" data-lang="sv">Hennes poetik närs av fysisk-rituell-somatiska praktiker, intuitioner, drömmar och nomadiska upplevelser i naturen. Hon utforskar konvergensen mellan teckning, vokal improvisation, butoh-dans och poesi.</p>
+        <p class="artist-links"><a href="https://pierinalategola.wixsite.com/pierina-lategola" target="_blank">Web</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/kiterea/" target="_blank">@kiterea</a></p>
+      </div>
+    </div>
+    <div class="artist">
+      <img class="artist-photo" src="images/ada.png" alt="Ada Gomiz">
+      <div>
+        <p class="artist-name">Ada Gomiz</p>
+        <p class="artist-role">
+          <span data-lang="en" class="lang-active">Composer, singer, wind player &amp; performer · UNTREF, Buenos Aires, Argentina</span>
+          <span data-lang="es">Compositora, cantante, instrumentista de viento y performer · UNTREF, Buenos Aires, Argentina</span>
+          <span data-lang="da">Komponist, sanger, blæser og performer · UNTREF, Buenos Aires, Argentina</span>
+          <span data-lang="no">Komponist, sanger, blåser og performer · UNTREF, Buenos Aires, Argentina</span>
+          <span data-lang="sv">Kompositör, sångare, blåsare och performer · UNTREF, Buenos Aires, Argentina</span>
+        </p>
+        <p class="artist-bio" data-lang="en" class="lang-active">Her work is focused on the intersections between contemporary chamber music composition, the cosmopoetics of Latin American neo-baroque literature, flamenco, performance, and transmedia experimentation through digital languages. She inhabits practices oriented towards improvisation, sound art, performance and dream intermedialities.</p>
+        <p class="artist-bio" data-lang="es">Su trabajo se centra en las intersecciones entre la composición musical de cámara contemporánea, la cosmopoética de la literatura neobarroca latinoamericana, el flamenco, la performance y la experimentación transmedia a través de lenguajes digitales. Habita prácticas orientadas hacia la improvisación, el arte sonoro, la performance y las intermedialidades oníricas.</p>
+        <p class="artist-bio" data-lang="da">Hendes arbejde er fokuseret på krydsfelterne mellem samtidskomposition af kammermusik, cosmopoetikken i latinamerikansk neobarok litteratur, flamenco, performance og transmedial eksperimentering gennem digitale sprog. Hun bebor praksisser orienteret mod improvisation, lydkunst, performance og drømmens intermedialiteter.</p>
+        <p class="artist-bio" data-lang="no">Hennes arbeid er fokusert på skjæringspunktene mellom samtidskomposisjon for kammermusikk, cosmopoetikken i latinamerikansk neobarokk litteratur, flamenco, performance og transmedial eksperimentering gjennom digitale språk. Hun bebor praksiser orientert mot improvisasjon, lydkunst, performance og drømmens intermedialiteter.</p>
+        <p class="artist-bio" data-lang="sv">Hennes arbete är fokuserat på skärningspunkterna mellan samtida kammarmusikkomposition, cosmopoetiken i latinamerikansk neobarock litteratur, flamenco, performance och transmedial experimentering genom digitala språk. Hon bebor praktiker orienterade mot improvisation, ljudkonst, performance och drömmarnas intermedialiteter.</p>
+        <p class="artist-links"><a href="https://adagomiz.wordpress.com" target="_blank">Web</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/tornasolunariz_ada/" target="_blank">@tornasolunariz_ada</a></p>
+      </div>
+    </div>
+    <div class="artist">
+      <img class="artist-photo" src="images/tatiana.png" alt="Tatiana Zuccolotto">
+      <div>
+        <p class="artist-name">Tatiana Zuccolotto</p>
+        <p class="artist-role">
+          <span data-lang="en" class="lang-active">Actress, dancer &amp; performer · Nordjylland, Denmark / Buenos Aires, Argentina</span>
+          <span data-lang="es">Actriz, bailarina y performer · Nordjylland, Dinamarca / Buenos Aires, Argentina</span>
+          <span data-lang="da">Skuespiller, danser og performer · Nordjylland, Danmark / Buenos Aires, Argentina</span>
+          <span data-lang="no">Skuespiller, danser og performer · Nordjylland, Danmark / Buenos Aires, Argentina</span>
+          <span data-lang="sv">Skådespelare, dansare och performer · Nordjylland, Danmark / Buenos Aires, Argentina</span>
+        </p>
+        <p class="artist-bio" data-lang="en" class="lang-active">An Argentine performer currently living in the North of Denmark. Her body of work explores the realms of theatre, dance, music and storytelling. Silence, conversion of languages, migration and the cycles of life are some of the themes around which her work develops. She has been co-directing and performing in: Do we pray enough (2023–2025), Hipnoidal (2025), Creative Sounds and Visuals — Frauen Festival, Antagon Teater Aktion (2024), Somewhere there will be birds flying (2024), Birds from the North (2023) and Siesta de Miel (2021).</p>
+        <p class="artist-bio" data-lang="es">Performer argentina que actualmente vive en el norte de Dinamarca. Su obra explora los ámbitos del teatro, la danza, la música y la narración. El silencio, la conversión de lenguajes, la migración y los ciclos de la vida son algunos de los temas en torno a los cuales se desarrolla su trabajo. Ha codirigido y actuado en: Do we pray enough (2023–2025), Hipnoidal (2025), Creative Sounds and Visuals — Frauen Festival, Antagon Teater Aktion (2024), Somewhere there will be birds flying (2024), Birds from the North (2023) y Siesta de Miel (2021).</p>
+        <p class="artist-bio" data-lang="da">En argentinsk kunstner, der i øjeblikket bor i det nordlige Danmark. Hendes arbejde udforsker teatrets, dansens, musikens og fortællingens verdener. Stilhed, sproglig omsætning, migration og livets cyklusser er temaer, som hendes arbejde udvikler sig omkring. Hun har medregisseret og optrådt i: Do we pray enough (2023–2025), Hipnoidal (2025), Creative Sounds and Visuals — Frauen Festival, Antagon Teater Aktion (2024), Somewhere there will be birds flying (2024), Birds from the North (2023) og Siesta de Miel (2021).</p>
+        <p class="artist-bio" data-lang="no">En argentinsk utøver som for øyeblikket bor i Nord-Danmark. Hennes arbeider utforsker teatrets, dansens, musikens og forttellingens verdener. Stillhet, språklig konvertering, migrasjon og livets sykluser er temaer som hennes arbeid utvikler seg rundt. Hun har medregissert og opptrådt i: Do we pray enough (2023–2025), Hipnoidal (2025), Creative Sounds and Visuals — Frauen Festival, Antagon Teater Aktion (2024), Somewhere there will be birds flying (2024), Birds from the North (2023) og Siesta de Miel (2021).</p>
+        <p class="artist-bio" data-lang="sv">En argentinsk konstnär som för närvarande bor i norra Danmark. Hennes verk utforskar teaterns, dansens, musikens och berättandets världar. Tystnad, språklig konvertering, migration och livets cykler är teman runt vilka hennes arbete utvecklas. Hon har medregisserat och uppträtt i: Do we pray enough (2023–2025), Hipnoidal (2025), Creative Sounds and Visuals — Frauen Festival, Antagon Teater Aktion (2024), Somewhere there will be birds flying (2024), Birds from the North (2023) och Siesta de Miel (2021).</p>
+        <p class="artist-links"><a href="https://drive.google.com/file/d/1Mx_FhfFrTOQEdldyFmJvj3ZoM-8JsZ0c/view" target="_blank">Portfolio</a> &nbsp;·&nbsp; <a href="https://www.instagram.com/tatiana.zucco/" target="_blank">@tatiana.zucco</a></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gallery-grid reveal" style="grid-template-columns:repeat(2,1fr);">
+  <img src="images/photo4.jpg" alt="Performance" style="grid-column:auto;height:440px;">
+  <img src="images/photo5.jpg" alt="Performance" style="grid-column:auto;height:440px;">
+</div>
+
+<section id="presentations" class="reveal">
+  <div class="section-inner">
+    <p class="section-label">
+      <span data-lang="en" class="lang-active">Presentations 2025</span>
+      <span data-lang="es">Presentaciones 2025</span>
+      <span data-lang="da">Forestillinger 2025</span>
+      <span data-lang="no">Forestillinger 2025</span>
+      <span data-lang="sv">Föreställningar 2025</span>
+    </p>
+    <ul class="show-list">
+      <li class="show-item">
+        <span class="show-date"><span data-lang="en" class="lang-active">Premiere<br>Aug 10</span><span data-lang="es">Estreno<br>10 Ago</span><span data-lang="da">Premiere<br>10 Aug</span><span data-lang="no">Premiere<br>10 Aug</span><span data-lang="sv">Premiär<br>10 Aug</span></span>
+        <span class="show-venue"><a href="https://www.instagram.com/p/DM7cB3Wo8RL/?img_index=1" target="_blank">Kirsten Kjærs Museum</a> — Langvadvej, Frøstrup, Denmark</span>
+      </li>
+      <li class="show-item">
+        <span class="show-date">Aug 26</span>
+        <span class="show-venue"><a href="https://www.instagram.com/p/DNnXZyCoLUs/?img_index=1" target="_blank">Spazio Mostro</a> — Turin, Italy</span>
+      </li>
+      <li class="show-item">
+        <span class="show-date">Aug 30</span>
+        <span class="show-venue"><a href="https://www.instagram.com/p/DNXWWC9IzEA/" target="_blank">Slow Festival</a> — Thisted, Denmark</span>
+      </li>
+      <li class="show-item">
+        <span class="show-date">Sep 5</span>
+        <span class="show-venue"><a href="https://www.instagram.com/p/DN-km5EijF3/?img_index=5" target="_blank">Art Week 36</a> — Ranum Refugee Center, Denmark</span>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<div class="full-bleed-img reveal">
+  <img src="images/photo6.jpg" alt="Hipnoidal" style="max-height:70vh;">
+</div>
+
+<!-- NORDIC TOUR 2026 -->
+<section id="nordic-tour" class="reveal">
+  <div class="nordic-inner">
+    <div class="nordic-headline">
+      <h2 class="nordic-title">
+        <span data-lang="en" class="lang-active">Nordic Tour</span>
+        <span data-lang="es">Gira Nórdica</span>
+        <span data-lang="da">Nordisk Turné</span>
+        <span data-lang="no">Nordisk Turné</span>
+        <span data-lang="sv">Nordisk Turné</span>
+      </h2>
+      <span class="nordic-year">August 2026</span>
+    </div>
+    <div class="nordic-divider"></div>
+    <p class="nordic-text" data-lang="en" class="lang-active">We are currently scheduling dates for our Nordic tour in August 2026. We are open to performing in theaters, art spaces, festivals, museums, and alternative venues across Denmark, Norway, Sweden, and beyond.</p>
+    <p class="nordic-text" data-lang="es">Estamos agendando fechas para nuestra gira nórdica en agosto de 2026. Estamos abiertos a presentaciones en teatros, espacios de arte, festivales, museos y venues alternativos en Dinamarca, Noruega, Suecia y más allá.</p>
+    <p class="nordic-text" data-lang="da">Vi er i gang med at planlægge datoer for vores nordiske turné i august 2026. Vi er åbne for optræden på teatre, kunstrum, festivaler, museer og alternative spillesteder i Danmark, Norge, Sverige og videre.</p>
+    <p class="nordic-text" data-lang="no">Vi planlegger for øyeblikket datoer for vår nordiske turné i august 2026. Vi er åpne for opptredener på teatre, kunstrom, festivaler, museer og alternative spillesteder i Danmark, Norge, Sverige og videre.</p>
+    <p class="nordic-text" data-lang="sv">Vi planerar för närvarande datum för vår nordiska turné i augusti 2026. Vi är öppna för uppträdanden på teatrar, konstrum, festivaler, museer och alternativa spelplatser i Danmark, Norge, Sverige och vidare.</p>
+    <div class="contact-block">
+      <span class="contact-tag">
+        <span data-lang="en" class="lang-active">Contact</span>
+        <span data-lang="es">Contacto</span>
+        <span data-lang="da">Kontakt</span>
+        <span data-lang="no">Kontakt</span>
+        <span data-lang="sv">Kontakt</span>
+      </span>
+      <p class="contact-intro">
+        <span data-lang="en" class="lang-active">For bookings and inquiries, reach us through</span>
+        <span data-lang="es">Para reservas y consultas, escríbenos a</span>
+        <span data-lang="da">For bookinger og henvendelser, skriv til os via</span>
+        <span data-lang="no">For bookinger og forespørsler, kontakt oss gjennom</span>
+        <span data-lang="sv">För bokningar och förfrågningar, kontakta oss via</span>
+      </p>
+      <ul class="contact-list">
+        <li><span class="contact-who">Tatiana</span><span class="contact-handle"><a href="https://www.instagram.com/tatiana.zucco/" target="_blank">@tatiana.zucco</a></span></li>
+        <li><span class="contact-who">Pierina</span><span class="contact-handle"><a href="https://www.instagram.com/kiterea/" target="_blank">@kiterea</a></span></li>
+        <li><span class="contact-who">Ada</span><span class="contact-handle"><a href="https://www.instagram.com/tornasolunariz_ada/" target="_blank">@tornasolunariz_ada</a></span></li>
+      </ul>
+    </div>
+    <p class="nordic-note" data-lang="en" class="lang-active">The piece requires a dark performance space and a semi-transparent fabric screen. Duration: 50–60 min. We travel light and adapt to intimate and large venues alike.</p>
+    <p class="nordic-note" data-lang="es">La obra requiere un espacio oscuro y una tela semitransparente como pantalla. Duración: 50–60 min. Viajamos liviano y nos adaptamos tanto a espacios íntimos como a venues más grandes.</p>
+    <p class="nordic-note" data-lang="da">Stykket kræver et mørkt rum og et halvgennemsigtigt stof som skærm. Varighed: 50–60 min. Vi rejser let og tilpasser os til både intime og større spillesteder.</p>
+    <p class="nordic-note" data-lang="no">Stykket krever et mørkt rom og et halvgjennomsiktig stoff som skjerm. Varighet: 50–60 min. Vi reiser lett og tilpasser oss til både intime og større spillesteder.</p>
+    <p class="nordic-note" data-lang="sv">Stycket kräver ett mörkt rum och ett halvtransparent tyg som skärm. Varaktighet: 50–60 min. Vi reser lätt och anpassar oss till både intima och större spelplatser.</p>
+  </div>
+</section>
+
+<footer>
+  <p class="footer-mark">Hipnoidal &nbsp;·&nbsp; 2025 — 2026</p>
+  <div class="footer-links">
+    <a href="https://www.instagram.com/kiterea/" target="_blank">@kiterea</a>
+    <a href="https://www.instagram.com/tornasolunariz_ada/" target="_blank">@tornasolunariz_ada</a>
+    <a href="https://www.instagram.com/tatiana.zucco/" target="_blank">@tatiana.zucco</a>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang) {
+    document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('lang-active'));
+    document.querySelectorAll('[data-lang="'+lang+'"]').forEach(el => el.classList.add('lang-active'));
+    document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+    document.getElementById('btn-'+lang).classList.add('active');
+    document.documentElement.lang = lang;
+  }
+  setLang('en');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
+  }, {threshold:.08,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+  window.addEventListener('scroll', () => {
+    document.getElementById('lang-bar').style.background = window.scrollY > 80
+      ? 'rgba(6,6,9,0.97)'
+      : 'linear-gradient(to bottom,rgba(6,6,9,0.95) 60%,transparent)';
+  }, {passive:true});
+</script>
+</body>
+</html>

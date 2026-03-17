@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -27,14 +27,30 @@
   .lang-btn.active{color:var(--gold);opacity:1;border-bottom:1px solid var(--gold-dim)}
   .lang-sep{color:var(--gold-dim);font-size:10px;user-select:none}
 
-  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 24px 60px;position:relative}
-  #hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none}
+  /* ── Hero ── */
+  #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:100px 24px 60px;position:relative;overflow:hidden}
+  #hero::after{content:'';position:absolute;bottom:0;left:0;right:0;height:200px;background:linear-gradient(to bottom,transparent,var(--bg));pointer-events:none;z-index:2}
+
+  /* ── Video de fondo ── */
+  #hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:.55}
+  .hero-video-overlay{position:absolute;inset:0;background:rgba(6,6,9,.38);z-index:1;pointer-events:none}
+
+  /* ── Contenido del hero (encima del video) ── */
+  .hero-content{position:relative;z-index:3}
   .hero-title-text{font-family:'Cormorant SC',serif;font-weight:300;font-size:clamp(52px,9vw,108px);letter-spacing:.22em;color:var(--white);opacity:0;animation:fadeUp 1.6s ease forwards .4s;margin-bottom:32px}
   .hero-subtitle{font-family:'Raleway',sans-serif;font-size:clamp(9px,1.5vw,12px);font-weight:300;letter-spacing:.35em;color:var(--gold);text-transform:uppercase;margin-bottom:20px;opacity:0;animation:fadeUp 1.4s ease forwards 1s}
   .hero-names{font-family:'Raleway',sans-serif;font-size:clamp(9px,1.2vw,11px);font-weight:200;letter-spacing:.28em;color:var(--text);text-transform:uppercase;opacity:0;animation:fadeUp 1.4s ease forwards 1.3s}
-  .hero-scroll-hint{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease forwards 2.5s}
+  .hero-scroll-hint{position:absolute;bottom:48px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeIn 1s ease forwards 2.5s;z-index:3}
   .hero-scroll-hint span{font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.3em;color:var(--gold-dim);text-transform:uppercase}
   .scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold-dim),transparent);animation:scrollLine 2s ease-in-out infinite 3s}
+
+  /* ── Botón de sonido ── */
+  #sound-btn{position:fixed;bottom:2rem;right:2rem;z-index:1000;background:rgba(6,6,9,.6);border:1px solid var(--gold-dim);color:var(--white);width:44px;height:44px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .25s,border-color .25s,transform .15s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  #sound-btn:hover{background:rgba(184,147,90,.15);border-color:var(--gold)}
+  #sound-btn:active{transform:scale(.92)}
+  #sound-btn svg{width:18px;height:18px;fill:var(--gold)}
+  #sound-btn::after{content:attr(data-tip);position:absolute;right:52px;white-space:nowrap;background:rgba(6,6,9,.85);color:var(--text);font-family:'Raleway',sans-serif;font-size:9px;letter-spacing:.2em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--gold-dim);opacity:0;pointer-events:none;transition:opacity .2s}
+  #sound-btn:hover::after{opacity:1}
 
   .full-bleed-img{width:100%;max-height:90vh;overflow:hidden;position:relative}
   .full-bleed-img img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;opacity:.88}
@@ -81,7 +97,6 @@
   .show-venue a{color:var(--text);text-decoration:none;border-bottom:1px solid var(--gold-dim);transition:color .3s,border-color .3s}
   .show-venue a:hover{color:var(--gold);border-color:var(--gold)}
 
-  /* ── Nordic Tour ── */
   #nordic-tour{padding:100px 24px;position:relative;overflow:hidden}
   #nordic-tour::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 80% 50%,rgba(30,60,80,.22) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 10% 50%,rgba(60,40,80,.14) 0%,transparent 60%);pointer-events:none}
   .nordic-inner{max-width:900px;margin:0 auto;position:relative}
@@ -129,6 +144,7 @@
     .lang-btn{padding:4px 6px;font-size:10px}
     .contact-block{padding:28px 24px}
     .nordic-headline{gap:14px}
+    #sound-btn{bottom:1.25rem;right:1.25rem;width:40px;height:40px}
   }
 </style>
 </head>
@@ -146,16 +162,36 @@
   <button class="lang-btn" onclick="setLang('sv')" id="btn-sv">SV</button>
 </nav>
 
+<!-- ░░ REEMPLAZÁ LA URL con la de tu GitHub Release ░░ -->
+<video
+  id="hero-video"
+  src="https://raw.githubusercontent.com/desterritorializ-ada/hipnoidal/main/%24hipnoidal_video_web.mp4"
+  autoplay loop muted playsinline preload="auto"
+></video>
+
+<!-- Botón sonido: esquina inferior derecha -->
+<button id="sound-btn" data-tip="ACTIVAR SONIDO" aria-label="Activar sonido">
+  <svg id="icon-mute" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M16.5 12A4.5 4.5 0 0 0 14 7.97V10.18l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51A8.796 8.796 0 0 0 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3 3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25A6.956 6.956 0 0 1 14 18.98v2.06A8.99 8.99 0 0 0 17.54 19l2.19 2.19L21 19.73 4.27 3zM12 4 9.91 6.09 12 8.18V4z"/>
+  </svg>
+  <svg id="icon-sound" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="display:none">
+    <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3A4.5 4.5 0 0 0 14 7.97v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/>
+  </svg>
+</button>
+
 <section id="hero">
-  <h1 class="hero-title-text">HIPNOIDAL</h1>
-  <p class="hero-subtitle">
-    <span data-lang="en" class="lang-active">Butoh Dance · Shadow Theatre · Live Music</span>
-    <span data-lang="es">Danza Butoh · Teatro de Sombras · Música en Vivo</span>
-    <span data-lang="da">Butoh-Dans · Skygge-Teater · Live Musik</span>
-    <span data-lang="no">Butoh-Dans · Skygge-Teater · Live Musikk</span>
-    <span data-lang="sv">Butoh-Dans · Skuggteater · Livemusik</span>
-  </p>
-  <p class="hero-names">Pierina Lategola &nbsp;·&nbsp; Ada Gomiz &nbsp;·&nbsp; Tatiana Zuccolotto</p>
+  <div class="hero-video-overlay"></div>
+  <div class="hero-content">
+    <h1 class="hero-title-text">HIPNOIDAL</h1>
+    <p class="hero-subtitle">
+      <span data-lang="en" class="lang-active">Butoh Dance · Shadow Theatre · Live Music</span>
+      <span data-lang="es">Danza Butoh · Teatro de Sombras · Música en Vivo</span>
+      <span data-lang="da">Butoh-Dans · Skygge-Teater · Live Musik</span>
+      <span data-lang="no">Butoh-Dans · Skygge-Teater · Live Musikk</span>
+      <span data-lang="sv">Butoh-Dans · Skuggteater · Livemusik</span>
+    </p>
+    <p class="hero-names">Pierina Lategola &nbsp;·&nbsp; Ada Gomiz &nbsp;·&nbsp; Tatiana Zuccolotto</p>
+  </div>
   <div class="hero-scroll-hint">
     <div class="scroll-line"></div>
     <span>
@@ -356,7 +392,6 @@
   <img src="images/photo6.jpg" alt="Hipnoidal" style="max-height:70vh;">
 </div>
 
-<!-- NORDIC TOUR 2026 -->
 <section id="nordic-tour" class="reveal">
   <div class="nordic-inner">
     <div class="nordic-headline">
@@ -414,6 +449,7 @@
 </footer>
 
 <script>
+  // ── Idioma ──
   function setLang(lang) {
     document.querySelectorAll('[data-lang]').forEach(el => el.classList.remove('lang-active'));
     document.querySelectorAll('[data-lang="'+lang+'"]').forEach(el => el.classList.add('lang-active'));
@@ -422,15 +458,59 @@
     document.documentElement.lang = lang;
   }
   setLang('en');
+
+  // ── Reveal on scroll ──
   const obs = new IntersectionObserver((entries) => {
     entries.forEach(e => { if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);} });
   }, {threshold:.08,rootMargin:'0px 0px -40px 0px'});
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // ── Nav scroll ──
   window.addEventListener('scroll', () => {
     document.getElementById('lang-bar').style.background = window.scrollY > 80
       ? 'rgba(6,6,9,0.97)'
       : 'linear-gradient(to bottom,rgba(6,6,9,0.95) 60%,transparent)';
   }, {passive:true});
+
+  // ── Botón de sonido ──
+  const video = document.getElementById('hero-video');
+  const btn   = document.getElementById('sound-btn');
+  const iMute = document.getElementById('icon-mute');
+  const iSound= document.getElementById('icon-sound');
+
+  const tips = {
+    en: ['ENABLE SOUND','MUTE'],
+    es: ['ACTIVAR SONIDO','SILENCIAR'],
+    da: ['AKTIVER LYD','LYD FRA'],
+    no: ['AKTIVER LYD','DEMP'],
+    sv: ['AKTIVERA LJUD','TYSTA']
+  };
+  let currentLang = 'en';
+
+  // Sobreescribimos setLang para actualizar también el tooltip
+  const _setLang = setLang;
+  window.setLang = function(lang) {
+    _setLang(lang);
+    currentLang = lang;
+    updateBtn();
+  }
+
+  function updateBtn() {
+    const t = tips[currentLang] || tips.en;
+    btn.setAttribute('data-tip', video.muted ? t[0] : t[1]);
+  }
+
+  btn.addEventListener('click', () => {
+    video.muted = !video.muted;
+    iMute.style.display  = video.muted  ? 'block' : 'none';
+    iSound.style.display = !video.muted ? 'block' : 'none';
+    updateBtn();
+  });
+
+  // Fallback autoplay
+  document.addEventListener('click', () => {
+    if (video.paused) video.play();
+  }, {once:true});
 </script>
 </body>
 </html>
